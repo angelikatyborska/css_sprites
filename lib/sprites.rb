@@ -1,11 +1,15 @@
 require 'sprites/version'
-require 'sprites/cli'
-require 'sprites/image_row'
+require 'sprites/image_grid'
+require 'sprites/sprite_stylesheet'
+require 'sprites/sprite'
 require 'rmagick'
 
 module Sprites
-  def self.run
-    # TODO: implement
-    puts 'Hello world'
+  def self.generate_sprite(path)
+    sprite = Sprite.new(path)
+    sprite.image.write("#{ File.dirname(path) }/#{ sprite.name }.png")
+    style = ::Stylish.generate do
+      a :color => :bright
+    end
   end
 end
