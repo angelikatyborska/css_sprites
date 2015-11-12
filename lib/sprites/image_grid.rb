@@ -2,36 +2,43 @@ module Sprites
   class ImageGrid
     include Enumerable
 
-    def initialize(images = [])
+    def initialize(images, options = {})
       @images = images
+      @name = options[:name].nil? ? '' : options[:name]
+      @orientation = options[:orientation].nil? ? :horizontal : options[:orientation]
       arrange_images!
     end
 
     def total_width
-      row_widths = @grid.map.with_index { |row, index| partial_width(index, row.size) }
-      row_widths.inject(0, :+)
+      row_widths = @grid.map.with_index { |row, index| image_x_offset(index, row.size) }
+      row_widths.max
     end
 
     def total_height
-      partial_height(total_rows, total_columns)
+      image_y_offset(total_rows)
     end
 
-
-    def name(row, column)
-      @grid[row][column][:filename]
+    def name
+      @name
     end
 
-    def partial_width(row, column)
-      @grid[row][0..column].inject(0) do |sum, image|
+    def image_name(row, column)
+      File.basename(@grid[row][column][:filename], '.*')
+    end
+
+    def image_x_offset(row, column)
+      return 0 if column == 0 || @images.empty?
+
+      @grid[row][0..(column - 1)].inject(0) do |sum, image|
         sum += image[:image].columns
       end
     end
 
-    def partial_height(row, column)
-      row_heights = @grid[0..row].map do |row|
-        row[0..column].inject(0) do |sum, image|
-          sum += image[:image].columns
-        end
+    def image_y_offset(row, column = 0)
+      return 0 if row == 0 || @images.empty?
+
+      row_heights = @grid[0..(row - 1)].map do |row|
+        row.map { |image| image[:image].rows }.max
       end
 
       row_heights.inject(0, :+)
@@ -42,19 +49,18 @@ module Sprites
 
       image_grid = Magick::Image.new(total_width, total_height) { self.background_color = 'transparent' }
 
-      width_pointer = 0
-
-      @images.each do |image|
-        image_grid = image_grid.composite(image[:image], width_pointer, 0, Magick::OverCompositeOp)
-        width_pointer += image[:image].columns
+      each_with_index do |image, n, k|
+        image_grid = image_grid.composite(image, image_x_offset(n, k), image_y_offset(n), Magick::OverCompositeOp)
       end
 
       image_grid
     end
 
-    def each(&block)
-      @images.each do |image|
-        block.call(image)
+    def each_with_index(&block)
+      @grid.each.with_index do |row, n|
+        row.each.with_index do |image, k|
+          block.call(image[:image], n, k)
+        end
       end
     end
 
@@ -63,17 +69,23 @@ module Sprites
     def arrange_images!
       @grid = [[]]
 
-      @images.each do |image, index|
-        @grid[0] << image
+      if @orientation == :horizontal
+        @images.each do |image|
+          @grid[0] << image
+        end
+      else
+        @images.each_with_index do |image, index|
+          @grid[index] = [image]
+        end
       end
-    end
 
-    def total_rows
-      @grid.size
-    end
+      def total_rows
+        @grid.size
+      end
 
-    def total_columns
-      @grid.map { |row| row.size }.max
+      def total_columns
+        @grid.map { |row| row.size }.max
+      end
     end
   end
 end

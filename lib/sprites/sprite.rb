@@ -12,7 +12,9 @@ module Sprites
         }
       end
 
-      @image_grid = Sprites::ImageGrid.new(@images)
+      # TODO: implement orientation choice
+      @image_grid = Sprites::ImageGrid.new(@images, name: @name, orientation: :horizontal)
+      @stylesheet = Sprites::SpriteStylesheet.new(@image_grid)
     end
 
     def name
@@ -24,7 +26,7 @@ module Sprites
     end
 
     def stylesheet
-
+      @stylesheet.to_s
     end
   end
 end

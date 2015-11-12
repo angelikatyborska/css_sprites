@@ -8,8 +8,6 @@ module Sprites
   def self.generate_sprite(path)
     sprite = Sprite.new(path)
     sprite.image.write("#{ File.dirname(path) }/#{ sprite.name }.png")
-    style = ::Stylish.generate do
-      a :color => :bright
-    end
+    File.write("#{ File.dirname(path) }/#{ sprite.name }.css", sprite.stylesheet)
   end
 end

@@ -10,19 +10,18 @@ RSpec.describe Sprites do
   describe '#generate_sprite' do
     before :all do
       @dir_name = "generate_sprite_test_#{ Time.now.iso8601 }"
-      @images_dir_name = 'sprite'
+      template_filename = 'sprite'
 
       Dir.chdir(File.dirname(__FILE__))
       Dir.mkdir(@dir_name)
       Dir.chdir(@dir_name)
-      Dir.mkdir(@images_dir_name)
+      Dir.mkdir(template_filename)
 
-      filenames = %w{checkerboard.png pink_puzzle_with_transparency.png arrow_tall.png}
-      filenames.each do |filename|
-        FileUtils.cp("#{File.dirname(__FILE__)}/test_images/#{filename}", @images_dir_name)
+      template_images_filenames.each do |filename|
+        FileUtils.cp("#{File.dirname(__FILE__)}/resources/#{filename}.png", template_filename)
       end
 
-      Sprites.generate_sprite("#{ Dir.pwd }/#{ @images_dir_name}")
+      Sprites.generate_sprite("#{ Dir.pwd }/#{ template_filename }")
     end
 
     after :all do
@@ -31,12 +30,12 @@ RSpec.describe Sprites do
     end
 
     it 'should create a css file' do
-      sprite_image_files = Dir.entries(Dir.pwd).select { |filename| filename == "#{ @images_dir_name }.css" }
+      sprite_image_files = Dir.entries(Dir.pwd).select { |filename| filename == "#{ template_filename }.css" }
       expect(sprite_image_files.size).to eq(1)
     end
 
     it 'should create a png file' do
-      sprite_image_files = Dir.entries(Dir.pwd).select { |filename| filename == "#{ @images_dir_name }.png" }
+      sprite_image_files = Dir.entries(Dir.pwd).select { |filename| filename == "#{ template_filename }.png" }
       expect(sprite_image_files.size).to eq(1)
     end
   end
