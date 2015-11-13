@@ -31,11 +31,11 @@ def vertical_sprite
 end
 
 def horizontal_sprite_image_grid
-  Sprites::ImageGrid.new(template_images, name: template_filename, orientation: :horizontal)
+  Sprites::ImageGrid.new(template_images, name: template_filename, stacking: :horizontal)
 end
 
 def vertical_sprite_image_grid
-  Sprites::ImageGrid.new(template_images, name: template_filename, orientation: :vertical)
+  Sprites::ImageGrid.new(template_images, name: template_filename, stacking: :vertical)
 end
 
 def horizontal_sprite_stylesheet

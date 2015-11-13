@@ -2,4 +2,5 @@
 
 require 'sprites'
 
-Sprites.generate_sprite("#{ File.realpath('.') }/#{ ARGV[0] }")
+cli = Sprites::CLI.new(ARGV)
+cli.parse!

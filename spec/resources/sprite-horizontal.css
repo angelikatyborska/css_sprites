@@ -1,6 +1,6 @@
 .sprite {
-  background: url('sprite.png') no-repeat;
   display: inline-block;
+  background: url('sprite.png') no-repeat;
 }
 
 .sprite.sprite-checkerboard {

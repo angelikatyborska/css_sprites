@@ -1,95 +1,93 @@
-module Sprites
-  class SpriteStylesheet
-    INDENT = '  '
+class Sprites::SpriteStylesheet
+  INDENT = '  '
 
-    def initialize(image_grid)
-      @image_grid = image_grid
+  def initialize(image_grid)
+    @image_grid = image_grid
+  end
+
+  def to_s
+    style = ''
+
+    rule_blocks.each do |block|
+      style << "\n" unless rule_blocks[0] == block
+      style << "#{ block[:selector] } {\n"
+      style << "#{ declarations_to_s(block[:declarations]) }"
+      style << "}\n"
     end
 
-    def to_s
-      style = ''
+    style
+  end
 
-      rule_blocks.each do |block|
-        style << "\n" unless rule_blocks[0] == block
-        style << "#{ block[:selector] } {\n"
-        style << "#{ declarations_to_s(block[:declarations]) }"
-        style << "}\n"
-      end
+  private
 
-      style
+  def rule_blocks
+    rules = [
+      {
+        selector: ".#{ base_class }",
+        declarations: base_declarations
+      }
+    ]
+
+    @image_grid.each_with_index do |image, row, column|
+      rules << {
+        selector: ".#{ base_class }.#{ image_class(row, column) }",
+        declarations: declarations_for_image(image, row, column)
+      }
     end
 
-    private
+    rules
+  end
 
-    def rule_blocks
-      rules = [
-        {
-          selector: ".#{ base_class }",
-          declarations: base_declarations
-        }
-      ]
+  def declarations_to_s(declarations)
+    declarations_to_s = ''
 
-      @image_grid.each_with_index do |image, row, column|
-        rules << {
-          selector: ".#{ base_class }.#{ image_class(row, column) }",
-          declarations: declarations_for_image(image, row, column)
-        }
-      end
-
-      rules
+    declarations.each do |declaration|
+      declarations_to_s << "#{ INDENT }#{ declaration[:property] }: #{ declaration[:value] };\n"
     end
 
-    def declarations_to_s(declarations)
-      declarations_to_s = ''
+    declarations_to_s
+  end
 
-      declarations.each do |declaration|
-        declarations_to_s << "#{ INDENT }#{ declaration[:property] }: #{ declaration[:value] };\n"
-      end
+  def base_class
+    @image_grid.name
+  end
 
-      declarations_to_s
-    end
+  def image_class(row, column)
+    "#{ base_class }-#{ @image_grid.image_name(row, column) }"
+  end
 
-    def base_class
-      @image_grid.name
-    end
+  def base_declarations
+    [
+      {
+        property: 'display',
+        value: 'inline-block'
+      },
+      {
+        property: 'background',
+        value: "url('#{ base_class }.png') no-repeat"
+      }
+    ]
+  end
 
-    def image_class(row, column)
-      "#{ base_class }-#{ @image_grid.image_name(row, column) }"
-    end
+  def declarations_for_image(image, row, column)
+    [
+      {
+        property: 'width',
+        value: "#{ with_px(image.columns) }"
+      },
+      {
+        property: 'height',
+        value: "#{ with_px(image.rows) }"
+      },
+      {
+        property: 'background-position',
+        value: "#{ with_px(-1 * @image_grid.image_x_offset(row, column)) } #{ with_px(-1 * @image_grid.image_y_offset(row)) }"
+      },
+    ]
+  end
 
-    def base_declarations
-      [
-        {
-          property: 'background',
-          value: "url('#{ base_class }.png') no-repeat"
-        },
-        {
-          property: 'display',
-          value: 'inline-block'
-        }
-      ]
-    end
-
-    def declarations_for_image(image, row, column)
-      [
-        {
-          property: 'width',
-          value: "#{ with_px(image.columns) }"
-        },
-        {
-          property: 'height',
-          value: "#{ with_px(image.rows) }"
-        },
-        {
-          property: 'background-position',
-          value: "#{ with_px(-1 * @image_grid.image_x_offset(row, column)) } #{ with_px(-1 * @image_grid.image_y_offset(row)) }"
-        },
-      ]
-    end
-
-    def with_px(value)
-      unit = 'px' unless value == 0
-      "#{ value }#{ unit }"
-    end
+  def with_px(value)
+    unit = 'px' unless value == 0
+    "#{ value }#{ unit }"
   end
 end
