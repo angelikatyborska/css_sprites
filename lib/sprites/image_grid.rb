@@ -1,6 +1,4 @@
 class Sprites::ImageGrid
-  include Enumerable
-
   def initialize(images, options = {})
     @images = images
     @name = options[:name].nil? ? '' : options[:name]
