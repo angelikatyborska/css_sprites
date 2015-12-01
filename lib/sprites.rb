@@ -2,7 +2,6 @@ require 'sprites/version'
 require 'sprites/image_grid'
 require 'sprites/sprite_stylesheet'
 require 'sprites/sprite'
-require 'sprites/cli'
 require 'rmagick'
 
 module Sprites

@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'sprites'
+require 'sprites/cli'
 
 cli = Sprites::CLI.new(ARGV)
 cli.parse!
