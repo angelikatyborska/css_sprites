@@ -17,6 +17,6 @@ module Sprites
     sprite.image.write("#{ output_file }.png")
     File.write("#{ output_file }.css", sprite.stylesheet)
 
-    puts "Files saved to #{ File.realpath(output_path) }"
+    File.realpath(output_path)
   end
 end

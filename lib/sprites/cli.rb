@@ -12,7 +12,8 @@ class Sprites::CLI
     path = ARGV[0]
 
     if path
-      Sprites.generate_sprite(path, @options)
+      output = Sprites.generate_sprite(path, @options)
+      $stdout.puts "Files saved to #{output}"
     else
       $stderr.puts opts.banner
     end
