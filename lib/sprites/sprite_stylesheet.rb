@@ -1,5 +1,6 @@
 class Sprites::SpriteStylesheet
-  INDENT = '  '
+  INDENT                 = '  '
+  INVALID_CSS_NAME_CHARS = /\W/
 
   def initialize(image_grid)
     @image_grid = image_grid
@@ -49,11 +50,11 @@ class Sprites::SpriteStylesheet
   end
 
   def base_class
-    @image_grid.name
+    @image_grid.name.gsub(INVALID_CSS_NAME_CHARS, '-')
   end
 
   def image_class(row, column)
-    "#{ base_class }-#{ @image_grid.image_name(row, column) }"
+    "#{ base_class }-#{ @image_grid.image_name(row, column).gsub(INVALID_CSS_NAME_CHARS, '-') }"
   end
 
   def base_declarations
