@@ -48,7 +48,7 @@ END
     opts.on(
       '-o',
       '--output PATH',
-      'The path to the directory to which generated files should be saved. Uses input directory\s path is no path given.'
+      'The path to the directory to which generated files should be saved. Uses input directory\'s path if no path given.'
     ) do |output|
       @options[:output] = output
     end
