@@ -26,7 +26,7 @@ class Sprites::CLI
 Usage: sprites [options] [INPUT DIR]
 
 Description:
-  Combines png files from the input directory into one png file and generates an adequate stylesheet.
+  Merges png files from the input directory into one png file and generates an adequate stylesheet.
 END
 
     opts.on(
