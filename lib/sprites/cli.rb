@@ -23,7 +23,7 @@ class Sprites::CLI
 
   def set_options(opts)
     opts.banner = <<END
-Usage: sprites [options] [INPUT DIR]
+Usage: sprites [options] input_dir
 
 Description:
   Merges png files from the input directory into one png file and generates an adequate stylesheet.
