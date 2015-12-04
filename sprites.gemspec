@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = Sprites::VERSION
   spec.authors       = ["Angelika Tyborska"]
   spec.email         = ["atyborska93@gmail.com"]
-  spec.summary       = %q{Merges many images into a single image and generates a stylesheet}
+  spec.summary       = %q{Merges many png images into a single image and generates a stylesheet}
   spec.homepage      = "https://github.com/angelikatyborska/sprites"
   spec.license       = "MIT"
 
