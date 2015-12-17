@@ -1,6 +1,6 @@
 # CSS Sprites
 
-Sprites finds all png files in the input directory, merges them together into a single PNG file and generates a CSS stylesheet for the output image. 
+CSS Sprites is a Ruby gem that finds all PNG files in the input directory, merges them together into a single PNG file and generates a CSS stylesheet for the output image. 
 
 ## Prerequisites
 
@@ -15,7 +15,7 @@ $ brew install imagemagick
 And if you're using Ubuntu:
 
 ```bash
-$ apt-get imagemagick
+$ apt-get install imagemagick
 ```
 
 ## Installation
