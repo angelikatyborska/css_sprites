@@ -15,7 +15,7 @@ $ brew install imagemagick
 And if you're using Ubuntu:
 
 ```bash
-$ apt-get install libmagickwand-dev
+$ sudo apt-get install libmagickwand-dev
 ```
 
 ## Installation
