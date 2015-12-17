@@ -52,7 +52,7 @@ END
     opts.on(
       '-o',
       '--output PATH',
-      'The path to the directory to which generated files should be saved. Uses input directory\'s path if no path given.'
+      'The path to the directory to which generated files should be saved. Uses input directory\'s parent\'s path if no path given.'
     ) do |output|
       @options[:output] = output
     end
@@ -71,7 +71,7 @@ END
       '--version',
       'Show version'
     ) do
-      puts "Sprites #{ CSSSprites::VERSION }"
+      puts "CSS Sprites #{ CSSSprites::VERSION }"
       exit
     end
   end
