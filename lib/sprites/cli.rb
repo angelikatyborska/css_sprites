@@ -12,8 +12,12 @@ class Sprites::CLI
     path = ARGV[0]
 
     if path
-      output = Sprites.generate_sprite(path, @options)
-      $stdout.puts "Files saved to #{output}"
+      begin
+        output = Sprites.generate_sprite(path, @options)
+        $stdout.puts "Files saved to #{ output }"
+      rescue ArgumentError => error
+        $stdout.puts error.message
+      end
     else
       $stderr.puts opts.banner
     end
@@ -67,7 +71,7 @@ END
       '--version',
       'Show version'
     ) do
-      puts "Sprites #{Sprites::VERSION}"
+      puts "Sprites #{ Sprites::VERSION }"
       exit
     end
   end

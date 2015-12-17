@@ -9,25 +9,25 @@ def template_images_filenames
   %w{checkerboard puzzle arrow}
 end
 
-def template_images
-  images = []
+def resources_path
+  "#{ File.dirname(__FILE__) }/resources"
+end
 
-  template_images_filenames.each do |filename|
+def template_images
+  template_images_filenames.each_with_object([]) do |filename, images|
     images << {
       filename: filename,
-      image: Magick::ImageList.new("#{File.dirname(__FILE__)}/resources/#{filename}.png")
+      image: Magick::ImageList.new("#{ resources_path }/#{ filename }.png")
     }
   end
-
-  images
 end
 
 def horizontal_sprite
-  Magick::ImageList.new("#{File.dirname(__FILE__)}/resources/sprite_checkerboard_puzzle_arrow_horizontal.png")
+  Magick::ImageList.new("#{ resources_path }/sprite_checkerboard_puzzle_arrow_horizontal.png")
 end
 
 def vertical_sprite
-  Magick::ImageList.new("#{File.dirname(__FILE__)}/resources/sprite_checkerboard_puzzle_arrow_vertical.png")
+  Magick::ImageList.new("#{ resources_path }/sprite_checkerboard_puzzle_arrow_vertical.png")
 end
 
 def horizontal_sprite_image_grid
