@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe Sprites::SpriteStylesheet do
+RSpec.describe CSSSprites::SpriteStylesheet do
   context 'with three differently-sized images' do
     context 'stacked horizontally' do
       it 'generates styles identical to the template' do

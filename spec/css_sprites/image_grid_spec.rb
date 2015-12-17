@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-RSpec.describe Sprites::ImageGrid do
+RSpec.describe CSSSprites::ImageGrid do
   context 'with no images' do
     before :all do
-      @empty_image_grid = Sprites::ImageGrid.new([])
+      @empty_image_grid = CSSSprites::ImageGrid.new([])
     end
 
     describe '#total_width' do

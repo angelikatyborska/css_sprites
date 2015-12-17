@@ -1,4 +1,4 @@
-class Sprites::SpriteStylesheet
+class CSSSprites::SpriteStylesheet
   INDENT                 = '  '
   INVALID_CSS_NAME_CHARS = /\W/
 

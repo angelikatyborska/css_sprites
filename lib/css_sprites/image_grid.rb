@@ -1,4 +1,4 @@
-class Sprites::ImageGrid
+class CSSSprites::ImageGrid
   def initialize(images, options = {})
     @images = images
     @name = options.fetch(:name, 'untitled')

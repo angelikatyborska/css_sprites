@@ -1,6 +1,6 @@
 require 'optparse'
 
-class Sprites::CLI
+class CSSSprites::CLI
   def initialize(args)
     @args = args
     @options = {}
@@ -13,7 +13,7 @@ class Sprites::CLI
 
     if path
       begin
-        output = Sprites.generate_sprite(path, @options)
+        output = CSSSprites.generate_sprite(path, @options)
         $stdout.puts "Files saved to #{ output }"
       rescue ArgumentError => error
         $stdout.puts error.message
@@ -71,7 +71,7 @@ END
       '--version',
       'Show version'
     ) do
-      puts "Sprites #{ Sprites::VERSION }"
+      puts "Sprites #{ CSSSprites::VERSION }"
       exit
     end
   end

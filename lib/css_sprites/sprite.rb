@@ -1,4 +1,4 @@
-class Sprites::Sprite
+class CSSSprites::Sprite
   def initialize(path, options = {})
     validate_path(path)
 
@@ -7,8 +7,8 @@ class Sprites::Sprite
     @name = options[:name]
     @images = load_images(path)
 
-    @image_grid = Sprites::ImageGrid.new(@images, options)
-    @stylesheet = Sprites::SpriteStylesheet.new(@image_grid)
+    @image_grid = CSSSprites::ImageGrid.new(@images, options)
+    @stylesheet = CSSSprites::SpriteStylesheet.new(@image_grid)
   end
 
   def name

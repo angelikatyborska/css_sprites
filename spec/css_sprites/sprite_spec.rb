@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-RSpec.describe Sprites::Sprite do
+RSpec.describe CSSSprites::Sprite do
   describe '#initialize' do
     context 'with an input directory that does not exist' do
       it 'raises an ArgumentError' do
-        expect { Sprites::Sprite.new('non_existent_dir') }.to raise_error(ArgumentError, /exist/)
+        expect { CSSSprites::Sprite.new('non_existent_dir') }.to raise_error(ArgumentError, /exist/)
       end
     end
 
@@ -20,7 +20,7 @@ RSpec.describe Sprites::Sprite do
       end
 
       it 'raises an ArgumentError' do
-        expect { Sprites::Sprite.new(@unreadable_dir) }
+        expect { CSSSprites::Sprite.new(@unreadable_dir) }
           .to raise_error(ArgumentError, Regexp.new("reading permissions.*for directory #{@unreadable_dir}"))
       end
     end
@@ -46,7 +46,7 @@ RSpec.describe Sprites::Sprite do
       end
 
       it 'raises an ArgumentError' do
-        expect { Sprites::Sprite.new("#{@dir_with_unreadable_image}") }
+        expect { CSSSprites::Sprite.new("#{@dir_with_unreadable_image}") }
           .to raise_error(ArgumentError, Regexp.new("reading permissions.*for file #{@image_filename}"))
       end
     end
@@ -69,19 +69,19 @@ RSpec.describe Sprites::Sprite do
     end
 
     it 'raises an ArgumentError' do
-      expect { Sprites::Sprite.new(@empty_dir) }
+      expect { CSSSprites::Sprite.new(@empty_dir) }
         .to raise_error(ArgumentError, Regexp.new("#{@empty_dir}.*no png files"))
     end
   end
 
   context 'with a correct input directory' do
     before :all do
-      @sprite = Sprites::Sprite.new(resources_path)
+      @sprite = CSSSprites::Sprite.new(resources_path)
     end
 
     describe '#name' do
       it 'returns the name that was passed to new' do
-        sprite = Sprites::Sprite.new(resources_path, name: 'my_name')
+        sprite = CSSSprites::Sprite.new(resources_path, name: 'my_name')
         expect(sprite.name).to eq 'my_name'
       end
 

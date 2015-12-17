@@ -23,7 +23,7 @@ $ apt-get imagemagick
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'sprites'
+gem 'css_sprites'
 ```
 
 And then execute:
@@ -33,7 +33,7 @@ $ bundle install
 
 Or install it yourself:
 ```bash
-$ gem install sprites
+$ gem install css_sprites
 ```
 
 ## Usage
@@ -41,14 +41,14 @@ $ gem install sprites
 In your Ruby app:
 
 ```ruby
-require 'sprites'
-Sprites.generate_sprite(path_to_images, options_hash)
+require 'css_sprites'
+CSSSprites.generate_sprite(path_to_images, options_hash)
 ```
 
 Or from the command line:
 
 ```bash
-$ sprites path/to/images
+$ css_sprites path/to/images
 ```
 
 ### Options
@@ -69,17 +69,17 @@ options = {
     name: 'so_awesome',
     output: 'my_awesome_icons_output'
 }
-Sprites.generate_sprite('my_awesome_icons', options)
+CSSSprites.generate_sprite('my_awesome_icons', options)
 ```
 
 From the command line:
 
 ```bash
-$ sprites --stacking vertical --name so_awesome --output my_awesome_icons_output my_awesome_icons
+$ css_sprites --stacking vertical --name so_awesome --output my_awesome_icons_output my_awesome_icons
 ```
 
 For more details:
 
 ```bash
-$ sprites --help
+$ css_sprites --help
 ```

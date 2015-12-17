@@ -1,5 +1,5 @@
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
-require 'sprites'
+require 'css_sprites'
 
 def template_filename
   'sprite'
@@ -31,17 +31,17 @@ def vertical_sprite
 end
 
 def horizontal_sprite_image_grid
-  Sprites::ImageGrid.new(template_images, name: template_filename, stacking: :horizontal)
+  CSSSprites::ImageGrid.new(template_images, name: template_filename, stacking: :horizontal)
 end
 
 def vertical_sprite_image_grid
-  Sprites::ImageGrid.new(template_images, name: template_filename, stacking: :vertical)
+  CSSSprites::ImageGrid.new(template_images, name: template_filename, stacking: :vertical)
 end
 
 def horizontal_sprite_stylesheet
-  Sprites::SpriteStylesheet.new(horizontal_sprite_image_grid)
+  CSSSprites::SpriteStylesheet.new(horizontal_sprite_image_grid)
 end
 
 def vertical_sprite_stylesheet
-  Sprites::SpriteStylesheet.new(vertical_sprite_image_grid)
+  CSSSprites::SpriteStylesheet.new(vertical_sprite_image_grid)
 end

@@ -2,9 +2,9 @@ require 'spec_helper'
 require 'time'
 require 'fileutils'
 
-RSpec.describe Sprites do
+RSpec.describe CSSSprites do
   it 'has a version number' do
-    expect(Sprites::VERSION).not_to be nil
+    expect(CSSSprites::VERSION).not_to be nil
   end
 
   describe '#generate_sprite' do
@@ -20,7 +20,7 @@ RSpec.describe Sprites do
         FileUtils.cp("#{ resources_path }/#{ filename }.png", template_filename)
       end
 
-      Sprites.generate_sprite(template_filename)
+      CSSSprites.generate_sprite(template_filename)
     end
 
     after :all do
@@ -42,7 +42,7 @@ RSpec.describe Sprites do
 
     context 'with a non-existent output directory' do
       it 'raises an ArgumentError' do
-        expect { Sprites.generate_sprite(template_filename, output: 'non_existent_directory') }
+        expect { CSSSprites.generate_sprite(template_filename, output: 'non_existent_directory') }
           .to raise_error(ArgumentError, /non_existent_directory.*does not exist/)
       end
     end
@@ -63,7 +63,7 @@ RSpec.describe Sprites do
       end
 
       it 'raises an ArgumentError' do
-        expect { Sprites.generate_sprite(template_filename, output: @unwritable_dir) }
+        expect { CSSSprites.generate_sprite(template_filename, output: @unwritable_dir) }
           .to raise_error(ArgumentError, Regexp.new("writing permissions.*for directory #{ @unwritable_dir }"))
       end
     end
