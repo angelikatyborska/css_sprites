@@ -56,7 +56,7 @@ $ sprites path/to/images
 Option | Type | Default | Description
 ------ | ---- | ------- | -----------
 :stacking | :horizontal or :vertical | :horizontal | How to order images in the sprite
-:output | string | input directory's parent path | Where to save the generated files
+:output | string | input directory's parent's path | Where to save the generated files
 :name | string | input directory's name | A name for the generated files
 
 
