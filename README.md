@@ -1,6 +1,22 @@
 # Sprites
 
-Sprites finds all png files in the input directory, merges them together into a single png file and generates a CSS stylesheet for the output png file. 
+Sprites finds all png files in the input directory, merges them together into a single PNG file and generates a CSS stylesheet for the output image. 
+
+## Prerequisites
+
+**ImageMagick** Version 6.4.9 or later. You can get ImageMagick from [www.imagemagick.org](http://www.imagemagick.org).
+
+Or, if you're on Mac OS X and using Homebrew, you can install it by typing:
+
+```bash
+$ brew install imagemagick
+```
+
+And if you're using Ubuntu:
+
+```bash
+$ apt-get imagemagick
+```
 
 ## Installation
 
@@ -15,7 +31,7 @@ And then execute:
 $ bundle install
 ```
 
-Or install it yourself as:
+Or install it yourself:
 ```bash
 $ gem install sprites
 ```
@@ -41,7 +57,7 @@ Option | Type | Default | Description
 ------ | ---- | ------- | -----------
 :stacking | :horizontal or :vertical | :horizontal | How to order images in the sprite
 :output | string | input directory's parent path | Where to save the generated files
-:name | string | input directory's name | Filename for the generated files
+:name | string | input directory's name | A name for the generated files
 
 
 ### Examples with options
@@ -51,13 +67,19 @@ In your Ruby app:
 options = {
     stacking: :vertical,
     name: 'so_awesome',
-    output: "#{ Dir.pwd }/my_awesome_icons_output"
+    output: 'my_awesome_icons_output'
 }
-Sprites.generate_sprite("#{ Dir.pwd }/my_awesome_icons", options)
+Sprites.generate_sprite('my_awesome_icons', options)
 ```
 
 From the command line:
 
 ```bash
-$ sprites -s vertical -n so_awesome -o my_awesome_icons_output my_awesome_icons
+$ sprites --stacking vertical --name so_awesome --output my_awesome_icons_output my_awesome_icons
+```
+
+For more details:
+
+```bash
+$ sprites --help
 ```
