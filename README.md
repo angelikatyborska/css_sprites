@@ -1,4 +1,4 @@
-# Sprites
+# CSS Sprites
 
 Sprites finds all png files in the input directory, merges them together into a single PNG file and generates a CSS stylesheet for the output image. 
 
