@@ -1,8 +1,9 @@
 class Sprites::ImageGrid
   def initialize(images, options = {})
     @images = images
-    @name = options[:name].nil? ? '' : options[:name]
-    @stacking = options[:stacking].nil? ? :horizontal : options[:stacking]
+    @name = options.fetch(:name, 'untitled')
+    @stacking = options.fetch(:stacking, :horizontal)
+
     arrange_images!
   end
 
